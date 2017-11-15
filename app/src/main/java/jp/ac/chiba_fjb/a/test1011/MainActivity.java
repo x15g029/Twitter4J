@@ -44,18 +44,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //投稿ボタンを押してキーがなければキー取得・ある場合投稿画面
-                if (!Twitter_Util.serchAccessToken()) {
-                    Log.v("MainActivity", "start oauth");
-                    Intent intent = new Intent(getActivity(),
-                            OauthActivity.class);
-                    startActivity(intent);
-                } else {
-                    send = new TwitterSend(getActivity());
-                    send.execute(cnt, shopName.getText().toString() + "\n"
-                            + twtext.getText().toString(), dir.getPath() + "/"
-                            + CameraFragment.PICPATH);
-                }
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,"つぶやく内容");
+                intent.setType("text/plain");
+                startActivity(intent);
+//                //投稿ボタンを押してキーがなければキー取得・ある場合投稿画面
+//                if (!Twitter_Util.serchAccessToken()) {
+//                    Log.v("MainActivity", "start oauth");
+//                    Intent intent = new Intent(getActivity(),OauthActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    send = new TwitterSend(getActivity());
+//                    send.execute(cnt, shopName.getText().toString() + "\n"
+//                            + twtext.getText().toString(), dir.getPath() + "/"
+//                            + CameraFragment.PICPATH);
+//                }
 
             }
         });
